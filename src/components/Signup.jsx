@@ -49,7 +49,6 @@ const Signup = ({setButtonText, setButtonPath, setLogin, setToken}) => {
       if (datas.status === "fail") {
         setError(datas.message);
       } else {
-        // Store the token in localStorage
         localStorage.setItem('token', datas.token);
         setLogin(true);
         setToken(datas.token);
@@ -69,43 +68,42 @@ const Signup = ({setButtonText, setButtonPath, setLogin, setToken}) => {
             <p className='text-[#6F6F74] m-2.5'>Enter your Name, email address and password to get started</p>
             {error && <div className='text-[#FA233B] mb-4'>{error}</div>}
             <form onSubmit={handleSubmit}>
-                <input
-                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1'
-                    type='text'
-                    name='name'
-                    placeholder='Name'
-                    value={data.name}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <input
-                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1'
-                    type='email'
-                    name='email'
-                    placeholder='Email or Apple ID'
-                    value={data.email}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <input
-                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1'
-                    type='password'
-                    name='password'
-                    placeholder='Password'
-                    value={data.password}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <button
-                    className='text-white px-3 py-2 bg-[#FA233B] rounded-[9.3px] m-2.5 border-1 border-[#821F2B]'
-                    type="submit"
-                >
-                    Continue
-                </button>
-            </form>
+              <input
+                  className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1 text-white'
+                  type='text'
+                  name='name'
+                  placeholder='Name'
+                  value={data.name}
+                  onChange={handleChange}
+                  required
+              />
+              <br />
+              <input
+                  className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1 text-white'
+                  type='email'
+                  name='email'
+                  placeholder='Email or Apple ID'
+                  value={data.email}
+                  onChange={handleChange}
+                  required
+              />
+              <br />
+              <input
+                  className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1 text-white'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                  value={data.password}
+                  onChange={handleChange}
+                  required
+              />
+              <br />
+              <button
+                  className='text-white px-3 py-2 bg-[#FA233B] rounded-[9.3px] m-2.5 border-1 border-[#821F2B]'
+                  type="submit"
+              >Continue
+              </button>
+          </form>
             <p className='text-[#FA233B]'>Already Have an Account? <Link to='/signin' className='underline'>Sign In</Link></p>
         </div>
     )

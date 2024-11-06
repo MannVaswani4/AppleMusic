@@ -71,7 +71,7 @@ const Signin = ({ setButtonText, setButtonPath, setLogin, setToken }) => {
             {error && <div className='text-[#FA233B] mb-4'>{error}</div>}
             <form onSubmit={handleSubmit}>
                 <input
-                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1'
+                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1 text-white'
                     type='email'
                     name='email'
                     placeholder='Email or Apple ID'
@@ -81,7 +81,7 @@ const Signin = ({ setButtonText, setButtonPath, setLogin, setToken }) => {
                 />
                 <br />
                 <input
-                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1'
+                    className='w-80 h-14 rounded-2xl m-2.5 bg-[#262628] border-2 border-[#525256] border-solid pl-1 text-white'
                     type='password'
                     name='password'
                     placeholder='Password'
@@ -93,8 +93,7 @@ const Signin = ({ setButtonText, setButtonPath, setLogin, setToken }) => {
                 <button
                     className='text-white px-3 py-2 bg-[#FA233B] rounded-[9.3px] m-2.5 border-1 border-[#821F2B]'
                     type="submit"
-                >
-                    Continue
+                >Continue
                 </button>
             </form>
             <p className='text-[#FA233B]'>Don't have an Account? <Link to='/signup' className='underline'>Create one</Link></p>
