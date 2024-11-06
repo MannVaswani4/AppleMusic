@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import MusicSectionLoader from './Loader';
 const Home = ({ setButtonText, setButtonPath }) => {
 
     const router = useNavigate();
     const sliderRef = useRef(null);
-
-    setButtonText('Sign In')
-    setButtonPath('/signin')
-
+    const [isLoading, setIsLoading] = useState(true);
     const [trending, setTrendingSongs] = useState([]);
     const [week20, setWeek20] = useState([]);
     const [month50, SetMonth50] = useState([]);
@@ -27,17 +24,30 @@ const Home = ({ setButtonText, setButtonPath }) => {
         { mood: 'excited', setter: setExcited },
         { mood: 'sad', setter: setSad }
     ];
+
     useEffect(() => {
-        fetchList.forEach(({ featured, mood, setter }) => {
-            const baseUrl = 'https://academics.newtonschool.co/api/v1/musicx/song';
-            let url = baseUrl;
-            if (featured) {
-                url += `?featured=${encodeURIComponent(featured)}`;
-            } else if (mood) {
-                url += `?mood=${encodeURIComponent(mood)}`;
+        setButtonText('Sign In');
+        setButtonPath('/signin');
+        
+        const fetchAllData = async () => {
+            setIsLoading(true);
+            try {
+                await Promise.all(fetchList.map(({ featured, mood, setter }) => {
+                    const baseUrl = 'https://academics.newtonschool.co/api/v1/musicx/song';
+                    let url = baseUrl;
+                    if (featured) {
+                        url += `?featured=${encodeURIComponent(featured)}`;
+                    } else if (mood) {
+                        url += `?mood=${encodeURIComponent(mood)}`;
+                    }
+                    return fetchSongs(url, setter);
+                }));
+            } finally {
+                setIsLoading(false);
             }
-            fetchSongs(url, setter);
-        });
+        };
+
+        fetchAllData();
     }, []);
     
     const fetchSongs = async (url, setter) => {
@@ -67,6 +77,10 @@ const Home = ({ setButtonText, setButtonPath }) => {
         ];
         
         return (
+            <>
+            {isLoading ? (
+                <MusicSectionLoader />
+            ) : (
             <div className='bg-[#262628] text-white pt-[70px]'>
                 {fetch_List.map(({ title, data }, index) => (
                     <div key={index} className={title.replace(/\s/g, '').toLowerCase()}>
@@ -101,6 +115,8 @@ const Home = ({ setButtonText, setButtonPath }) => {
                     </div>
                 ))}
             </div>
+             )}
+        </>
         );
         
 }
